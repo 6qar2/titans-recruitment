@@ -15,6 +15,7 @@
     --crimson-bright: #B22222;
     --black: #080808;
     --dark: #111111;
+    --dark2: #1a1a1a;
     --text: #e8e0d0;
     --text-muted: #8a8078;
   }
@@ -89,18 +90,21 @@
     to { opacity: 1; transform: translateY(0); }
   }
 
-  .logo-shield {
-    width: 280px;
-    height: auto;
-    margin: 0 auto 20px;
-    position: relative;
-    filter: drop-shadow(0 0 20px rgba(201, 168, 76, 0.2));
+  .logo-container {
+    margin-bottom: 32px;
   }
 
-  .logo-img {
+  .logo-shield {
+    width: 110px;
+    height: 110px;
+    margin: 0 auto;
+    position: relative;
+    filter: drop-shadow(0 0 30px rgba(201,168,76,0.4));
+  }
+
+  .shield-svg {
     width: 100%;
-    height: auto;
-    display: block;
+    height: 100%;
   }
 
   .eyeline {
@@ -122,6 +126,7 @@
 
   .eyeline-text {
     font-size: 11px;
+    font-weight: 500;
     letter-spacing: 0.35em;
     color: var(--gold);
     text-transform: uppercase;
@@ -132,9 +137,11 @@
     font-size: clamp(52px, 12vw, 100px);
     font-weight: 900;
     line-height: 0.9;
+    letter-spacing: -0.01em;
     background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 40%, #a07830 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    background-clip: text;
     margin-bottom: 4px;
   }
 
@@ -152,6 +159,7 @@
     font-size: 14px;
     line-height: 1.8;
     color: var(--text-muted);
+    letter-spacing: 0.02em;
   }
 
   .scroll-cta {
@@ -166,15 +174,63 @@
     border: 1px solid rgba(201,168,76,0.3);
     padding: 14px 32px;
     transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
   }
 
-  .scroll-cta:hover { border-color: var(--gold); background: rgba(201,168,76,0.05); }
+  .scroll-cta::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(201,168,76,0.08);
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+  }
+
+  .scroll-cta:hover::before { transform: translateX(0); }
+  .scroll-cta:hover { border-color: var(--gold); }
 
   /* ── FORM SECTION ── */
-  .form-section { padding: 100px 20px; position: relative; }
-  .form-wrapper { max-width: 560px; margin: 0 auto; }
-  .section-label { text-align: center; margin-bottom: 48px; }
-  .section-label h2 { font-family: 'Cinzel', serif; font-size: clamp(28px, 6vw, 44px); margin-bottom: 8px; }
+  .form-section {
+    padding: 100px 20px;
+    position: relative;
+  }
+
+  .form-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1px;
+    height: 80px;
+    background: linear-gradient(to bottom, transparent, var(--gold));
+  }
+
+  .form-wrapper {
+    max-width: 560px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  .section-label h2 {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(28px, 6vw, 44px);
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+
+  .section-label p {
+    font-size: 13px;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+  }
+
   .gold-accent { color: var(--gold); }
 
   .form-card {
@@ -184,34 +240,53 @@
     position: relative;
   }
 
-  .form-card::before { content: ''; position: absolute; top: 0; left: 0; width: 40px; height: 40px; border-top: 2px solid var(--gold); border-left: 2px solid var(--gold); }
-  .form-card::after { content: ''; position: absolute; bottom: 0; right: 0; width: 40px; height: 40px; border-bottom: 2px solid var(--crimson); border-right: 2px solid var(--crimson); }
+  .form-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 40px; height: 40px;
+    border-top: 2px solid var(--gold);
+    border-left: 2px solid var(--gold);
+  }
+
+  .form-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; right: 0;
+    width: 40px; height: 40px;
+    border-bottom: 2px solid var(--crimson);
+    border-right: 2px solid var(--crimson);
+  }
 
   .field-group { margin-bottom: 28px; }
-  .field-label { display: block; font-size: 10px; font-weight: 500; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
-  
+
+  .field-label {
+    display: block;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 10px;
+  }
+
   .field-input {
     width: 100%;
     background: rgba(255,255,255,0.03);
     border: 1px solid rgba(255,255,255,0.1);
     border-bottom: 1px solid rgba(201,168,76,0.3);
     color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
     padding: 14px 16px;
     outline: none;
     transition: all 0.3s ease;
-    border-radius: 0;
   }
 
-  .field-input:focus { border-color: var(--gold); background: rgba(201,168,76,0.04); }
-
-  select.field-input {
-    appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23C9A84C' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 16px center;
+  .field-input:focus {
+    border-color: var(--gold);
+    background: rgba(201,168,76,0.04);
   }
-  
-  select.field-input option { background: #111; color: var(--text); }
 
   .submit-btn {
     width: 100%;
@@ -230,18 +305,40 @@
 
   .submit-btn:hover { background: var(--gold); color: var(--black); }
 
-  .success-msg { display: none; text-align: center; padding: 60px 40px; }
+  .success-msg {
+    display: none;
+    text-align: center;
+    padding: 60px 40px;
+  }
+
   .success-msg.show { display: block; }
   .form-fields.hide { display: none; }
-  .success-icon { font-size: 40px; color: var(--gold); margin-bottom: 20px; }
 
-  footer { text-align: center; padding: 60px 20px; border-top: 1px solid rgba(255,255,255,0.05); font-size: 11px; color: var(--text-muted); }
-
-  @keyframes shake {
-    0%,100% { transform: translateX(0); }
-    25% { transform: translateX(-5px); }
-    75% { transform: translateX(5px); }
+  .contact-info {
+    margin-top: 40px;
+    text-align: center;
+    font-size: 13px;
+    color: var(--text-muted);
   }
+
+  .contact-info a {
+    color: var(--text);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+
+  .contact-info a:hover { color: var(--gold); }
+
+  footer {
+    text-align: center;
+    padding: 40px 20px 60px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .footer-logo { font-family: 'Cinzel', serif; font-size: 13px; letter-spacing: 0.3em; color: var(--gold); margin-bottom: 8px; }
+  .footer-sub { font-size: 11px; color: var(--text-muted); letter-spacing: 0.1em; }
+
+  @media (max-width: 500px) { .form-card { padding: 32px 24px; } }
 </style>
 </head>
 <body>
@@ -249,15 +346,42 @@
 <section class="hero">
   <div class="hero-bg"></div>
   <div class="hero-content">
-    <div class="logo-shield">
-      <img src="preview.jpg" alt="Titans Logo" class="logo-img">
+    <div class="logo-container">
+      <div class="logo-shield">
+        <svg class="shield-svg" viewBox="0 0 120 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M60 8 L108 28 L108 80 Q108 118 60 135 Q12 118 12 80 L12 28 Z" fill="#8B1A1A" stroke="#C9A84C" stroke-width="3"/>
+          <path d="M60 18 L98 34 L98 78 Q98 110 60 126 Q22 110 22 78 L22 34 Z" fill="#6B1010" stroke="#a07830" stroke-width="1.5"/>
+          <polygon points="60,10 55,32 65,32" fill="#C9A84C"/>
+          <rect x="42" y="48" width="36" height="6" rx="1" fill="#C9A84C"/>
+          <rect x="44" y="56" width="12" height="4" rx="1" fill="#080808"/>
+          <rect x="64" y="56" width="12" height="4" rx="1" fill="#080808"/>
+          <rect x="58" y="54" width="4" height="20" rx="1" fill="#C9A84C"/>
+          <path d="M42 60 Q36 66 38 76 L44 76 L44 60Z" fill="#C9A84C"/>
+          <path d="M78 60 Q84 66 82 76 L76 76 L76 60Z" fill="#C9A84C"/>
+          <rect x="44" y="74" width="32" height="8" rx="2" fill="#C9A84C"/>
+        </svg>
+      </div>
     </div>
+
     <div class="eyeline">
-      <div class="eyeline-bar"></div><span class="eyeline-text">Galala University</span><div class="eyeline-bar right"></div>
+      <div class="eyeline-bar"></div>
+      <span class="eyeline-text">Galala University</span>
+      <div class="eyeline-bar right"></div>
     </div>
+
     <h1 class="hero-title">TITANS</h1>
     <p class="hero-sub">Recruitment is Live</p>
-    <a href="#apply" class="scroll-cta">Apply Now</a>
+
+    <p class="hero-desc">
+      We don't recruit followers. We build leaders.<br>
+      Join the club that sets the standard at Galala University.<br>
+      Applications close when the roster is full.
+    </p>
+
+    <a href="#apply" class="scroll-cta">
+      <span>Apply Now</span>
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1v12M1 7l6 6 6-6" stroke="currentColor" stroke-width="1.5"/></svg>
+    </a>
   </div>
 </section>
 
@@ -265,99 +389,83 @@
   <div class="form-wrapper">
     <div class="section-label">
       <h2>Join the <span class="gold-accent">Titans</span></h2>
-      <p>Submit your credentials below</p>
+      <p>Fill in your details below — we'll be in touch shortly</p>
     </div>
 
     <div class="form-card">
-      <form action="https://formspree.io/f/xkokgrbq" method="POST" id="recruitmentForm">
-        <div class="form-fields">
-          
-          <div class="field-group">
-            <label class="field-label">Full Name</label>
-            <input class="field-input" type="text" name="name" placeholder="Enter your full name" required>
-          </div>
-
-          <div class="field-group">
-            <label class="field-label">Student ID</label>
-            <input class="field-input" type="text" name="student_id" placeholder="e.g. 202301234" required>
-          </div>
-
-          <div class="field-group">
-            <label class="field-label">Faculty / Major</label>
-            <input class="field-input" type="text" name="major" placeholder="e.g. Dentistry" required>
-          </div>
-
-          <div class="field-group">
-            <label class="field-label">Academic Year</label>
-            <select class="field-input" name="academic_year" required>
-              <option value="" disabled selected>Select your year</option>
-              <option value="1">Year 1</option>
-              <option value="2">Year 2</option>
-              <option value="3">Year 3</option>
-              <option value="4">Year 4</option>
-              <option value="5+">Year 5+</option>
-            </select>
-          </div>
-
-          <div class="field-group">
-            <label class="field-label">Preferred Committee</label>
-            <select class="field-input" name="committee" required>
-              <option value="" disabled selected>Choose your path</option>
-              <option value="Media">Media</option>
-              <option value="Marketing">Marketing</option>
-              <option value="Organising">Organising</option>
-              <option value="Events">Events</option>
-            </select>
-          </div>
-
-          <button type="submit" class="submit-btn"><span>Submit Application →</span></button>
+      <form class="form-fields" id="titanForm" action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST">
+        <div class="field-group">
+          <label class="field-label">Full Name</label>
+          <input class="field-input" type="text" name="name" placeholder="Your full name" required>
         </div>
+
+        <div class="field-group">
+          <label class="field-label">Email Address</label>
+          <input class="field-input" type="email" name="email" placeholder="your@email.com" required>
+        </div>
+
+        <div class="field-group">
+          <label class="field-label">Phone Number</label>
+          <input class="field-input" type="tel" name="phone" placeholder="+20 10X XXX XXXX" required>
+        </div>
+
+        <div class="field-group">
+          <label class="field-label">Major / Faculty</label>
+          <input class="field-input" type="text" name="major" placeholder="e.g. Dentistry, Business..." required>
+        </div>
+
+        <button type="submit" class="submit-btn">
+          <span>Submit Application →</span>
+        </button>
       </form>
 
       <div class="success-msg" id="successMsg">
         <div class="success-icon">✦</div>
         <h3>Application Received</h3>
-        <p>Welcome to the ranks, Titan. We'll reach out soon.</p>
+        <p>Welcome to the ranks, Titan.<br>We'll reach out soon. Stay sharp.</p>
       </div>
+    </div>
+
+    <div class="contact-info">
+        <p style="margin-bottom: 10px; letter-spacing: 0.1em; color: var(--gold);">DIRECT CONTACT</p>
+        <p>Email: <a href="mailto:titans@galala.edu">titans@galala.edu</a></p>
+        <p>Phone: <a href="tel:+201000000000">+20 10X XXX XXXX</a></p>
     </div>
   </div>
 </section>
 
 <footer>
-  <div style="letter-spacing: 0.3em; color: var(--gold); margin-bottom: 10px;">THE TITANS</div>
-  <div>Galala University · Est. 2025 · President: Hesham Yasser</div>
+  <div class="footer-logo">THE TITANS</div>
+  <div class="footer-sub">Galala University · Est. 2026 · Club President: Hesham Yasser</div>
 </footer>
 
 <script>
-  const form = document.getElementById('recruitmentForm');
+  const form = document.getElementById('titanForm');
   const successMsg = document.getElementById('successMsg');
-  const formFields = document.querySelector('.form-fields');
 
-  form.onsubmit = async (e) => {
-    e.preventDefault();
-    const btn = form.querySelector('.submit-btn span');
-    const originalText = btn.innerText;
-    btn.innerText = "Processing...";
-
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault(); // Prevents the page from refreshing
+    
+    const formData = new FormData(form);
+    
+    // Sends the data to the action URL
     try {
       const response = await fetch(form.action, {
         method: 'POST',
-        body: new FormData(form),
+        body: formData,
         headers: { 'Accept': 'application/json' }
       });
 
       if (response.ok) {
-        formFields.classList.add('hide');
+        form.classList.add('hide');
         successMsg.classList.add('show');
       } else {
-        btn.innerText = originalText;
-        alert("Error submitting form. Please try again.");
+        alert("Oops! There was a problem submitting your form.");
       }
     } catch (error) {
-      btn.innerText = originalText;
-      alert("Network error. Please check your connection.");
+      alert("Error connecting to the server.");
     }
-  };
+  });
 </script>
 
 </body>
