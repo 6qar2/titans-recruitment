@@ -94,17 +94,10 @@
     margin-bottom: 32px;
   }
 
-  .logo-shield {
-    width: 110px;
-    height: 110px;
-    margin: 0 auto;
-    position: relative;
+  .custom-logo {
+    width: clamp(180px, 25vw, 280px);
+    height: auto;
     filter: drop-shadow(0 0 30px rgba(201,168,76,0.4));
-  }
-
-  .shield-svg {
-    width: 100%;
-    height: 100%;
   }
 
   .eyeline {
@@ -281,11 +274,25 @@
     padding: 14px 16px;
     outline: none;
     transition: all 0.3s ease;
+    border-radius: 0;
   }
 
   .field-input:focus {
     border-color: var(--gold);
     background: rgba(201,168,76,0.04);
+  }
+
+  select.field-input {
+    cursor: pointer;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23C9A84C' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+  }
+
+  select.field-input option {
+    background: #111;
+    color: #fff;
   }
 
   .submit-btn {
@@ -314,21 +321,6 @@
   .success-msg.show { display: block; }
   .form-fields.hide { display: none; }
 
-  .contact-info {
-    margin-top: 40px;
-    text-align: center;
-    font-size: 13px;
-    color: var(--text-muted);
-  }
-
-  .contact-info a {
-    color: var(--text);
-    text-decoration: none;
-    transition: color 0.3s;
-  }
-
-  .contact-info a:hover { color: var(--gold); }
-
   footer {
     text-align: center;
     padding: 40px 20px 60px;
@@ -347,20 +339,7 @@
   <div class="hero-bg"></div>
   <div class="hero-content">
     <div class="logo-container">
-      <div class="logo-shield">
-        <svg class="shield-svg" viewBox="0 0 120 140" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M60 8 L108 28 L108 80 Q108 118 60 135 Q12 118 12 80 L12 28 Z" fill="#8B1A1A" stroke="#C9A84C" stroke-width="3"/>
-          <path d="M60 18 L98 34 L98 78 Q98 110 60 126 Q22 110 22 78 L22 34 Z" fill="#6B1010" stroke="#a07830" stroke-width="1.5"/>
-          <polygon points="60,10 55,32 65,32" fill="#C9A84C"/>
-          <rect x="42" y="48" width="36" height="6" rx="1" fill="#C9A84C"/>
-          <rect x="44" y="56" width="12" height="4" rx="1" fill="#080808"/>
-          <rect x="64" y="56" width="12" height="4" rx="1" fill="#080808"/>
-          <rect x="58" y="54" width="4" height="20" rx="1" fill="#C9A84C"/>
-          <path d="M42 60 Q36 66 38 76 L44 76 L44 60Z" fill="#C9A84C"/>
-          <path d="M78 60 Q84 66 82 76 L76 76 L76 60Z" fill="#C9A84C"/>
-          <rect x="44" y="74" width="32" height="8" rx="2" fill="#C9A84C"/>
-        </svg>
-      </div>
+      <img src="preview.jpg" alt="The Titans Logo" class="custom-logo">
     </div>
 
     <div class="eyeline">
@@ -393,25 +372,48 @@
     </div>
 
     <div class="form-card">
-      <form class="form-fields" id="titanForm" action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST">
+      <form class="form-fields" id="titanForm" action="https://formspree.io/f/YOUR_ID" method="POST">
         <div class="field-group">
           <label class="field-label">Full Name</label>
-          <input class="field-input" type="text" name="name" placeholder="Your full name" required>
+          <input class="field-input" type="text" name="name" required>
         </div>
 
         <div class="field-group">
           <label class="field-label">Email Address</label>
-          <input class="field-input" type="email" name="email" placeholder="your@email.com" required>
+          <input class="field-input" type="email" name="email" required>
         </div>
 
         <div class="field-group">
           <label class="field-label">Phone Number</label>
-          <input class="field-input" type="tel" name="phone" placeholder="+20 10X XXX XXXX" required>
+          <input class="field-input" type="tel" name="phone" required>
         </div>
 
         <div class="field-group">
-          <label class="field-label">Major / Faculty</label>
-          <input class="field-input" type="text" name="major" placeholder="e.g. Dentistry, Business..." required>
+          <label class="field-label">Faculty</label>
+          <input class="field-input" type="text" name="faculty" required>
+        </div>
+
+        <div class="field-group">
+          <label class="field-label">Academic Year</label>
+          <select class="field-input" name="year" required>
+            <option value="" disabled selected>Select Year</option>
+            <option value="1">Year 1</option>
+            <option value="2">Year 2</option>
+            <option value="3">Year 3</option>
+            <option value="4">Year 4</option>
+            <option value="5">Year 5+</option>
+          </select>
+        </div>
+
+        <div class="field-group">
+          <label class="field-label">Committee</label>
+          <select class="field-input" name="committee" required>
+            <option value="" disabled selected>Select Committee</option>
+            <option value="Content & Media">Content & Media</option>
+            <option value="Marketing & PR">Marketing & PR</option>
+            <option value="Organising">Organising</option>
+            <option value="Events & Activities">Events & Activities</option>
+          </select>
         </div>
 
         <button type="submit" class="submit-btn">
@@ -420,16 +422,10 @@
       </form>
 
       <div class="success-msg" id="successMsg">
-        <div class="success-icon">✦</div>
+        <div style="font-size: 30px; margin-bottom: 20px;">✦</div>
         <h3>Application Received</h3>
         <p>Welcome to the ranks, Titan.<br>We'll reach out soon. Stay sharp.</p>
       </div>
-    </div>
-
-    <div class="contact-info">
-        <p style="margin-bottom: 10px; letter-spacing: 0.1em; color: var(--gold);">DIRECT CONTACT</p>
-        <p>Email: <a href="mailto:titans@galala.edu">titans@galala.edu</a></p>
-        <p>Phone: <a href="tel:+201000000000">+20 10X XXX XXXX</a></p>
     </div>
   </div>
 </section>
@@ -444,11 +440,9 @@
   const successMsg = document.getElementById('successMsg');
 
   form.addEventListener('submit', async (e) => {
-    e.preventDefault(); // Prevents the page from refreshing
-    
+    e.preventDefault();
     const formData = new FormData(form);
     
-    // Sends the data to the action URL
     try {
       const response = await fetch(form.action, {
         method: 'POST',
@@ -460,10 +454,10 @@
         form.classList.add('hide');
         successMsg.classList.add('show');
       } else {
-        alert("Oops! There was a problem submitting your form.");
+        alert("Submission failed. Please try again.");
       }
     } catch (error) {
-      alert("Error connecting to the server.");
+      alert("Error connecting to server.");
     }
   });
 </script>
